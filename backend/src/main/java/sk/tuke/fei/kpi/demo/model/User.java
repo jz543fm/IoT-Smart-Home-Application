@@ -3,8 +3,8 @@ package sk.tuke.fei.kpi.demo.model;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import sk.tuke.fei.kpi.demo.Role;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -43,7 +43,15 @@ public class User implements Serializable {
 
     @Column(name = "zip_code", nullable = true)
     private String zipCode;
-    
+
+    @Transient
+    public Set<GrantedAuthority> getAuthority() {
+        return Set.of(new SimpleGrantedAuthority("ROLE_" + role));
+    }
+
+    @Column(nullable = false)
+    private String role = Role.USER.name();
+
 
     public String getFirstName() {
         return firstName;
@@ -51,12 +59,6 @@ public class User implements Serializable {
 
     public String getLastName() {
         return lastName;
-    }
-
-
-    @Transient
-    public Set<GrantedAuthority> getAuthority() {
-        return Set.of(new SimpleGrantedAuthority("ROLE_\n"));
     }
 
 }
