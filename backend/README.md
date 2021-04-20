@@ -13,13 +13,13 @@ path: `C:\xampp\phpMyAdmin\config.inc.php`
 
 with:
 
-`/* Authentication type and info */
-$cfg['Servers'][$i]['auth_type'] = 'cookie';
-$cfg['Servers'][$i]['user'] = 'root';
-$cfg['Servers'][$i]['password'] = '';
-$cfg['Servers'][$i]['extension'] = 'mysqli';
-$cfg['Servers'][$i]['AllowNoPassword'] = true;
-$cfg['Lang'] = '';`
+`/* Authentication type and info */`
+`$cfg['Servers'][$i]['auth_type'] = 'cookie';`
+`$cfg['Servers'][$i]['user'] = 'root';`
+`$cfg['Servers'][$i]['password'] = '';`
+`$cfg['Servers'][$i]['extension'] = 'mysqli';`
+`$cfg['Servers'][$i]['AllowNoPassword'] = true;`
+`$cfg['Lang'] = '';`
 
 then XAMPP console for mysql:
 
