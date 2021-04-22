@@ -1,5 +1,6 @@
 package sk.tuke.fei.kpi.demo.controller;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,6 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import sk.tuke.fei.kpi.demo.mapper.LightMapper;
 import sk.tuke.fei.kpi.demo.mapper.LightViewDTO;
 import sk.tuke.fei.kpi.demo.service.LightService;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -54,6 +64,24 @@ public class LightController {
             POST REQ TO /rest/light for setting each light to specific color
        */
 
+    @SneakyThrows
+    @RequestMapping(value ="/rest/light/all-on", method = RequestMethod.GET)
+    public void getOn()   {
 
+        URL url = new URL("https://openlab.kpi.fei.tuke.sk/rest/light/all-on");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection(); con.setRequestMethod("GET");
+        BufferedReader in = new BufferedReader(new InputStreamReader( con.getInputStream()));
+        String inputLine; while ((inputLine = in.readLine()) != null) { System.out.println(inputLine); } in.close();
+    }
+
+    @SneakyThrows
+    @RequestMapping(value ="/rest/light/all-off", method = RequestMethod.GET)
+    public void getOff()   {
+
+        URL url = new URL("https://openlab.kpi.fei.tuke.sk/rest/light/all-off");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection(); con.setRequestMethod("GET");
+        BufferedReader in = new BufferedReader(new InputStreamReader( con.getInputStream()));
+        String inputLine; while ((inputLine = in.readLine()) != null) { System.out.println(inputLine); } in.close();
+    }
 
 }

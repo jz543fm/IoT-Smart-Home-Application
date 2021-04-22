@@ -1,0 +1,45 @@
+version: '3.3'
+services:
+backend:
+  build:
+    dockerfile: Dockerfile
+    context: ./backend/icube/
+  container_name: backend-iot2_website
+  depends_on:
+    - db
+  environment:
+    - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/icube_website
+    - SPRING_DATASOURCE_USERNAME=root
+    - SPRING_DATASOURCE_PASSWORD=rootadmin
+    - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  networks:
+    - spring-icube-network
+  restart: always
+
+  db:
+    image: 'mysql:8.0.22'
+    container_name: database-iot2_website
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootadmin
+      - MYSQL_DATABASE=icube_website
+      - MYSQL_USER=icube_user
+    networks:
+      - spring-icube-network
+    restart: always
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend/icube/
+    container_name: frontend-iot2_website
+    ports:
+      - 4420:80
+    restart: always
+    networks:
+      - spring-icube-network
+
+networks:
+  spring-icube-network:
+    driver: bridge
