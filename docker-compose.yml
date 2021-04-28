@@ -3,7 +3,7 @@ services:
 backend:
   build:
     dockerfile: Dockerfile
-    context: ./backend/icube/
+    context: ./backend/
   container_name: backend-iot2_website
   depends_on:
     - db
