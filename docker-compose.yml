@@ -1,26 +1,32 @@
 version: '3.3'
 services:
-backend:
-  build:
-    dockerfile: Dockerfile
-    context: ./backend/
-  container_name: backend-iot2_website
-  depends_on:
-    - db
-  environment:
-    - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/icube_website
-    - SPRING_DATASOURCE_USERNAME=root
-    - SPRING_DATASOURCE_PASSWORD=rootadmin
-    - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-  networks:
-    - spring-icube-network
-  restart: always
+
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend/
+    container_name: backend-icube_website
+    depends_on:
+      - vpn
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/icube_website
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootadmin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - TZ='EST5EDT'
+    network_mode: "service:vpn"
+    stdin_open: true
+    tty: true
+#    networks:
+#      - spring-icube-network 
+    restart: always
 
   db:
     image: 'mysql:8.0.22'
-    container_name: database-iot2_website
+    container_name: database-icube_website
     ports:
-      - 3306:3306
+    - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=rootadmin
       - MYSQL_DATABASE=icube_website
@@ -29,17 +35,34 @@ backend:
       - spring-icube-network
     restart: always
 
-  frontend:
-    build:
-      dockerfile: Dockerfile
-      context: ./frontend/icube/
-    container_name: frontend-iot2_website
-    ports:
-      - 4420:80
-    restart: always
+  vpn:
+    image: dperson/openvpn-client
+    # cap_add, security_opt, and volume required for the image to function
+    cap_add:
+      - net_admin
+    environment:
+      TZ: 'EST5EDT'
     networks:
       - spring-icube-network
+    # if using '-d' or 'DNS' you can't enable the `read_only: true` option
+    read_only: true
+    tmpfs:
+      - /run
+      - /tmp
+    restart: always
+    security_opt:
+      - label:disable
+    stdin_open: true
+    tty: true
+    volumes:
+      - /dev/net:/dev/net:z
+      - /volumes/openvpn-client/vpn/:/vpn
+    # Put .ovpn configuration file in the /vpn directory (in "volumes:" above or
+    # launch using the command line arguments, IE pick one:
+    #  - ./vpn:/vpn
+    # command: 'server;user;password[;port]'
 
 networks:
   spring-icube-network:
     driver: bridge
+
