@@ -35,21 +35,6 @@ services:
       - spring-icube-network
     restart: always
 
-  service1:
-    image: 'mysql:5.7'
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootadmin
-      - MYSQL_DATABASE=icube_website
-      - MYSQL_USER=icube_user
-    depends_on:
-      - vpn
-    environment:
-      TZ: 'EST5EDT'
-    network_mode: "service:vpn"
-    restart: unless-stopped
-    stdin_open: true
-    tty: true
-
   vpn:
     image: dperson/openvpn-client
     # cap_add, security_opt, and volume required for the image to function
@@ -80,11 +65,11 @@ services:
   web:
     image: dperson/nginx
     depends_on:
-      - service1
+      - backend
     environment:
       TZ: 'EST5EDT'
     links:
-      - vpn:service1
+      - vpn:backend
     networks:
       - spring-icube-network
     ports:
@@ -98,7 +83,7 @@ services:
     restart: unless-stopped
     stdin_open: true
     tty: true
-    command: -w "http://service1:8082;/service1"
+    command: -w "http://backend:8082;/backend"
     # service1 shares the network stack of vpn. The service can by reached using
     # the name of the service as a hostname.
 
