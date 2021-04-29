@@ -35,6 +35,21 @@ services:
       - spring-icube-network
     restart: always
 
+  service1:
+    image: 'mysql:5.7'
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootadmin
+      - MYSQL_DATABASE=icube_website
+      - MYSQL_USER=icube_user
+    depends_on:
+      - vpn
+    environment:
+      TZ: 'EST5EDT'
+    network_mode: "service:vpn"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
   vpn:
     image: dperson/openvpn-client
     # cap_add, security_opt, and volume required for the image to function
@@ -45,7 +60,7 @@ services:
     networks:
       - spring-icube-network
     # if using '-d' or 'DNS' you can't enable the `read_only: true` option
-    read_only: true
+    read_only: false
     tmpfs:
       - /run
       - /tmp
@@ -61,6 +76,33 @@ services:
     # launch using the command line arguments, IE pick one:
     #  - ./vpn:/vpn
     # command: 'server;user;password[;port]'
+
+  web:
+    image: dperson/nginx
+    depends_on:
+      - service1
+    environment:
+      TZ: 'EST5EDT'
+    links:
+      - vpn:service1
+    networks:
+      - spring-icube-network
+    ports:
+      - "82:80"
+      - "443:443"
+    read_only: false
+    tmpfs:
+      - /run
+      - /tmp
+      - /var/cache/nginx
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    command: -w "http://service1:8082;/service1"
+    # service1 shares the network stack of vpn. The service can by reached using
+    # the name of the service as a hostname.
+
+
 
 networks:
   spring-icube-network:
