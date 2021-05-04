@@ -1,4 +1,4 @@
-Port: 
-`3000`
-Start FE:
-`npm start`
+Port:    
+`3000`   
+Start FE:    
+`npm start`   
