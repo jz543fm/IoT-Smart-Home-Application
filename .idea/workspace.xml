@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b0a3251-6916-4d06-90c0-acfb3858699c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/iot-smart-home-application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iot-smart-home-application.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/sk/tuke/fei/kpi/demo/controller/LightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/sk/tuke/fei/kpi/demo/controller/LightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/sk/tuke/fei/kpi/demo/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/sk/tuke/fei/kpi/demo/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +67,7 @@
       <workItem from="1619536646444" duration="715000" />
       <workItem from="1619594690240" duration="5500000" />
       <workItem from="1619626399771" duration="6803000" />
+      <workItem from="1620232153619" duration="404000" />
     </task>
     <task id="LOCAL-00001" summary="Update docker-compose.yml Dockerfile">
       <created>1619595875337</created>

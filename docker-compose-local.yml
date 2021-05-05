@@ -1,0 +1,60 @@
+version: '3.3'
+services:
+
+  backend:
+    build:
+      dockerfile: Dockerfile.local
+      context: ./backend/
+    container_name: backend-icube_website
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/icube_website
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootadmin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - TZ='EST5EDT'
+    networks:
+      - spring-icube-network
+    ports:
+      - 8082:8082
+    stdin_open: true
+    tty: true
+#    networks:
+#      - spring-icube-network 
+    restart: always
+
+  db:
+    image: 'mysql:8.0.22'
+    container_name: database-icube_website
+    ports:
+    - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootadmin
+      - MYSQL_DATABASE=icube_website
+      - MYSQL_USER=icube_user
+    networks:
+      - spring-icube-network
+    restart: always
+
+    # service1 shares the network stack of vpn. The service can by reached using
+    # the name of the service as a hostname.
+
+  frontend:
+    build:
+      dockerfile: Dockerfile.local
+      context: ./frontend/
+    container_name: frontend-icube_website
+    networks:
+      - spring-icube-network
+    stdin_open: true
+    tty: true
+    ports:
+      - 80:80
+    restart: always
+
+
+networks:
+  spring-icube-network:
+    driver: bridge
+

@@ -84,9 +84,22 @@ services:
     stdin_open: true
     tty: true
     command: -w "http://backend:8082;/backend"
+
     # service1 shares the network stack of vpn. The service can by reached using
     # the name of the service as a hostname.
 
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend/
+    container_name: frontend-icube_website
+    networks:
+      - spring-icube-network
+    stdin_open: true
+    tty: true
+    ports:
+      - 3000:82
+    restart: always
 
 
 networks:
