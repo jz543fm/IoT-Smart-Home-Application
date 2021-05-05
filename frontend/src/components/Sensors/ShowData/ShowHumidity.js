@@ -33,8 +33,8 @@ export default function ShowHumidity ( props ) {
         ];
  
         return (
-            <div>
-                <h2>Humidity: {props.value}</h2>
+            <div  style={{padding: 5, textAlign: 'center'}} >
+                <h2>Humidity:</h2>
                 <LiquidFillGauge
                     style={{ margin: '0 auto' }}
                     width={radius * 2}

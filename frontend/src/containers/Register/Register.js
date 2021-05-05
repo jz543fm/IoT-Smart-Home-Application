@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import classes from './LogIn.css';
+import classes from './Register.css';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import LogInForm from '../../components/LogIn/LogInForm';
+import SignInForm from '../../components/SignIn/SignInForm';
 import Button from '@material-ui/core/Button';
 
 class LogIn extends Component {
     state = {
         login: '',
-        password: ''
+        name: '',
+        surname: '',
+        password: '',
+        passwordAgain: '',
+        created: false,
+    }
+
+    componentDidMount () {
+        this.setState({created: false});
     }
 
     handleInputChange = ( input, newValue ) => {
@@ -19,19 +27,19 @@ class LogIn extends Component {
     }
 
     submitHandler = (event) => {
-        console.log('LogIn as ' + this.state.login + ' with password ' + this.state.password);
-        event.preventDefault();
-        this.props.onAuth(this.state);  
+        console.log(this.state.name + ' ' + this.state.surname + ' your account has been created!');
+        this.setState({created: true});
     }
 
     render () { 
 
         let form = 
         <div>
-            <LogInForm 
+            <SignInForm 
                 handleInputChange={this.handleInputChange}/>
             <p/>
-            <Button style={{margin : 5}}variant="contained" color="secondary" onClick={this.submitHandler}> Log In </Button>
+            
+            <Button style={{margin : 5}} variant="contained" color="secondary" onClick={this.submitHandler}> Submit </Button>
         </div>
 
         if (this.props.loading) {
@@ -39,15 +47,15 @@ class LogIn extends Component {
         };
 
         let authRedirect = null;
-        if(this.props.isAuth) {
-            authRedirect = <Redirect to="/main" />
+        if(this.state.created) {
+            authRedirect = <Redirect to="/" />
         }
 
         return (
             <div className={classes.Auth}> 
             
                 {authRedirect}
-                <h1>Log in</h1>
+                <h1>Sign in</h1>
                 {form}
             </div> 
         )

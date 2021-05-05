@@ -4,17 +4,19 @@ import GaugeChart from 'react-gauge-chart';
 
 
 export default function ShowTemparature( props ) {
+        const min = - 15;
+        const max = 50;
         const chartStyle = {
             height: 200,
-            width: 250,
-          }
+            width: 235,
+        }
         return (
-            <div>   
-                <h2>Temparature: {props.value}</h2>
+            <div  style={{padding: 5, textAlign: 'center'}} >   
+                <h2>Temparature:</h2>
                 <GaugeChart id="gauge-temparature" 
                     animate={true} 
-                    nrOfLevels={10} 
-                    percent={((props.value + 15 ) / (70))} 
+                    nrOfLevels={6} 
+                    percent={((props.value - min ) / (-min + max))} 
                     needleColor="#345243" 
                     textColor="#ffffff"
                     colors={["#2ee3ff", "#ff5f2e"]}

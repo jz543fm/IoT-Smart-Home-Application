@@ -9,12 +9,14 @@ import Sensors from './containers/Sensors/Sensors';
 import Lights from './containers/Lights/Lights';
 import History from './containers/History/History';
 import LogOut from './containers/LogIn/LogOut/LogOut';
+import SignIn from './containers/Register/Register';
 
 class App extends Component {
   render () {
     let routes = (
       <Switch>
         <Route path="/" exact component={LogIn} />
+        <Route path="/signIn" exact component={SignIn} />
         {/* <Route path="/" exact component={MainMenu} /> */}
         <Redirect to="/"/>
       </Switch>

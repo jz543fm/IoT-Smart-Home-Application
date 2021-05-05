@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,7 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  let history = useHistory();
 
+  const handleSignIn = () => {
+    history.push('/signIn');
+  }
+
+  const handleLogIn = () => {
+    history.push('/');
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -27,7 +36,8 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             IoT Smarthome
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={handleLogIn}>Log in</Button>
+          <Button color="inherit" onClick={handleSignIn}>Sign in</Button>
         </Toolbar>
       </AppBar>
     </div>
