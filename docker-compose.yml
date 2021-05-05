@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./backend/
-    container_name: backend-icube_website
+    container_name: backend-iotapplication_smarthome
     depends_on:
       - vpn
       - db
@@ -24,7 +24,7 @@ services:
 
   db:
     image: 'mysql:8.0.22'
-    container_name: database-icube_website
+    container_name: database-iotapplication_smarthome
     ports:
     - 3306:3306
     environment:
@@ -37,6 +37,7 @@ services:
 
   vpn:
     image: dperson/openvpn-client
+    container_name: opevpn_client-iotapplication_smarthome
     # cap_add, security_opt, and volume required for the image to function
     cap_add:
       - net_admin
@@ -64,6 +65,7 @@ services:
 
   web:
     image: dperson/nginx
+    container_name: backend_web_vpn_service-iotapplication_smarthome
     depends_on:
       - backend
     environment:
@@ -92,7 +94,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend/
-    container_name: frontend-icube_website
+    container_name: frontend-iotapplication_smarthome
     networks:
       - spring-icube-network
     stdin_open: true
