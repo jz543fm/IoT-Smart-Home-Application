@@ -35,7 +35,7 @@ export default function SimpleAccordion() {
             <AccordionCard 
                 temparatureValue={10}
                 lightValue={10}
-                pressureValue={10}
+                pressureValue={1010}
                 humidityValue={10}
                 soundValue={10}
             />
@@ -55,7 +55,7 @@ export default function SimpleAccordion() {
             <AccordionCard 
                 temparatureValue={20}
                 lightValue={20}
-                pressureValue={20}
+                pressureValue={1020}
                 humidityValue={20}
                 soundValue={20}
             />
@@ -74,7 +74,7 @@ export default function SimpleAccordion() {
             <AccordionCard 
                 temparatureValue={30}
                 lightValue={30}
-                pressureValue={30}
+                pressureValue={1030}
                 humidityValue={30}
                 soundValue={30}
             />
@@ -93,7 +93,7 @@ export default function SimpleAccordion() {
             <AccordionCard 
                 temparatureValue={40}
                 lightValue={40}
-                pressureValue={40}
+                pressureValue={1040}
                 humidityValue={40}
                 soundValue={40}
             />
@@ -112,7 +112,7 @@ export default function SimpleAccordion() {
             <AccordionCard 
                 temparatureValue={50}
                 lightValue={50}
-                pressureValue={50}
+                pressureValue={1050}
                 humidityValue={50}
                 soundValue={50}
             />

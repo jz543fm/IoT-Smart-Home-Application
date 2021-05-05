@@ -117,13 +117,11 @@ export default function PersistentDrawerLeft( props ) {
   const handleMapClicked = () => {
     // console.log('Map');
     history.push('/main');
-;
   };
   
   const handleSensorsClicked = () => {
     // console.log('Sensors');
     history.push('/sensors');
-
   };
 
   const handleHistoryClicked = () => {
@@ -187,16 +185,14 @@ export default function PersistentDrawerLeft( props ) {
           </IconButton>
         </div>
         <Divider />
-        <Tooltip title="Map with lights">
+        
           <List>
+            <Tooltip title="Map with lights">
             <ListItem button key={'Map'} onClick={handleMapClicked}>
               <ListItemIcon><HomeIcon /></ListItemIcon>
               <ListItemText primary={'Map'} />
             </ListItem>
-          </List>
         </Tooltip>
-        <Divider flexItem  />
-        <List>
           <Tooltip title="Sensors in the room">
             <ListItem button key={'Sensors'} onClick={handleSensorsClicked}>
               <ListItemIcon><RssFeedIcon /></ListItemIcon>

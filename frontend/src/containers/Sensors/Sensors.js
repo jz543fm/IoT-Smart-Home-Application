@@ -20,6 +20,7 @@ class Sensors extends Component {
         <div>
             <h1 align="center">Sensors</h1>
             <img style={imageStyle} src={img} alt="sensors" />
+            <p/>
             <AllSensors />
         </div>
         );

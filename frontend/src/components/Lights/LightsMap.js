@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import LoopIcon from '@material-ui/icons/Loop';
 import Divider from '@material-ui/core/Divider';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -72,6 +73,7 @@ export default function LightGrid (props) {
                     {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27].reverse().map((y) => 
                         <Grid item xs key={(x*27 + y)} >
                           { ((x*27 + y)%2 === 0) ?
+                          <Tooltip title={"Id: " + (x*27 + y) + " Color: "} placement="top">
                             <Paper onClick={() => LightClicked(x*27 + y)} className={classes.paperSmallGreen}>
                               {(x*27 + y)}
                               <div/>
@@ -81,7 +83,8 @@ export default function LightGrid (props) {
                                 onChange={() => handleLightChecked(x*27 + y)}
                                 inputProps={{ 'aria-label': 'checkbox with default color' }}
                               />
-                            </Paper> :
+                            </Paper>
+                            </Tooltip> :
                             <Paper onClick={() => LightClicked(x*27 + y)} className={classes.paperSmallRed}>
                               {(x*27 + y)} 
                               <div/>
