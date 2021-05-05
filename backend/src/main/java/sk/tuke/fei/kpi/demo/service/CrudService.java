@@ -3,6 +3,7 @@ package sk.tuke.fei.kpi.demo.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import sk.tuke.fei.kpi.demo.logger.Logger;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.stream.StreamSupport;
 
 public abstract class CrudService<T> {
     protected abstract PagingAndSortingRepository<T, Long> getRepository();
+    String SERVICE_NAME = "CrudService";
+
 
     public T save(T entity) {
         return getRepository().save(entity);
@@ -34,6 +37,8 @@ public abstract class CrudService<T> {
     }
 
     public List<T> findAll() {
+        Logger.getInstance().info(SERVICE_NAME, "FindAll\n");
+
         Iterable<T> all = getRepository().findAll();
         return StreamSupport.stream(all.spliterator(), false)
                 .collect(Collectors.toList());
@@ -48,6 +53,8 @@ public abstract class CrudService<T> {
     }
 
     public void delete(Long id) {
+
+        Logger.getInstance().info(SERVICE_NAME, "Delete\n");
         getRepository().deleteById(id);
     }
 

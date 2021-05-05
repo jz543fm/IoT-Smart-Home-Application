@@ -10,6 +10,7 @@ import sk.tuke.fei.kpi.demo.repository.LightRepository;
 
 @Service
 public class LightService extends CrudService<Light> {
+    String SERVICE_NAME = "LightService";
 
     private final LightRepository lightRepository;
 
