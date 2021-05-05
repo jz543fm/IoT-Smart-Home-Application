@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import sk.tuke.fei.kpi.demo.logger.Logger;
 import sk.tuke.fei.kpi.demo.mapper.LightMapper;
 import sk.tuke.fei.kpi.demo.mapper.LightViewDTO;
 import sk.tuke.fei.kpi.demo.service.LightService;
@@ -33,6 +34,8 @@ public class LightController {
     public Page<LightViewDTO> getAllByNameContaining(@RequestParam(defaultValue = "0") int page,
                                                      @RequestParam(defaultValue = "9") int size,
                                                      @PathVariable("keyword") String keyword) {
+        Logger.getInstance().info("Method LightNameContains", "[CONTROLLER] LightController \n");
+
         Page<LightViewDTO> lightViewDTOS = this.lightService.findLightByNameContaining(keyword, PageRequest.of(page, size))
                 .map(LightMapper.INSTANCE::toLightViewDTO);
 
@@ -40,28 +43,11 @@ public class LightController {
     }
 
 
-    /*
-            GET REQ TO /rest/light/all-on switch all lights to white
-
-     */
-
-
-
-
-      /*
-            GET REQ TO /rest/light/all-off switch all lights  off and turn of automatic mode
-
-     */
-
-
-      /*
-
-            POST REQ TO /rest/light for setting each light to specific color
-       */
-
     @SneakyThrows
     @RequestMapping(value = "/rest/light/all-on", method = RequestMethod.GET)
     public void getOn() {
+
+        Logger.getInstance().info("Method GetOn", "[INFO] LightController \n");
 
         URL url = new URL("https://openlab.kpi.fei.tuke.sk/rest/light/all-on");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -77,6 +63,7 @@ public class LightController {
     @SneakyThrows
     @RequestMapping(value = "/rest/light/all-off", method = RequestMethod.GET)
     public void getOff() {
+        Logger.getInstance().info("Method getOff", "[CONTROLLER] LightController \n");
 
         URL url = new URL("https://openlab.kpi.fei.tuke.sk/rest/light/all-off");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -92,6 +79,7 @@ public class LightController {
     @RequestMapping(value = "/change/color", consumes = "application/json", method = RequestMethod.POST)
     public void ChangeColor(@RequestBody String json) throws IOException {
         try {
+            Logger.getInstance().info("Method ChangeColor", "[CONTROLLER] LightController \n");
 
             URL url = new URL("https://openlab.kpi.fei.tuke.sk/rest/light");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -122,11 +110,12 @@ public class LightController {
             conn.disconnect();
 
         } catch (MalformedURLException e) {
+            Logger.getInstance().error("MalformedURLException", "Printing Stack trace: \n");
 
             e.printStackTrace();
 
         } catch (IOException e) {
-
+            Logger.getInstance().error("IOException", "Printing Stack trace: \n");
             e.printStackTrace();
 
         }

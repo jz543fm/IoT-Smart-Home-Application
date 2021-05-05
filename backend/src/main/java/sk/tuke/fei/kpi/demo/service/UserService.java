@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sk.tuke.fei.kpi.demo.logger.Logger;
 import sk.tuke.fei.kpi.demo.model.User;
 import sk.tuke.fei.kpi.demo.repository.UserRepository;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Primary
 @Service
 public class UserService extends CrudService<User> implements UserDetailsService {
+    String SERVICE_NAME = "UserService";
 
     private final UserRepository userRepository;
 
@@ -44,8 +46,10 @@ public class UserService extends CrudService<User> implements UserDetailsService
 
     @Override
     public UserDetails loadUserByUsername(String username) {
+        Logger.getInstance().error(SERVICE_NAME, "loadUserByUsername\n");
         Optional<User> user = userRepository.findByEmail(username);
         if (user.isEmpty()) {
+            Logger.getInstance().error(SERVICE_NAME, "UsernameNotFoundException\n");
             throw new UsernameNotFoundException(username);
         }
         return new org.springframework.security.core.userdetails.User(user.get().getEmail(),
@@ -55,16 +59,19 @@ public class UserService extends CrudService<User> implements UserDetailsService
     @Override
     public User save(User user) {
         //register
+        Logger.getInstance().info(SERVICE_NAME, "Encoding user password\n");
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Logger.getInstance().info(SERVICE_NAME, "Password encoded\n");
+
         try {
             User savedUser = userRepository.save(user);
-
-            // initial Cart
-//            Cart savedCart = cartRepository.save(new Cart(savedUser));
-//            savedUser.setCart(savedCart);
+            Logger.getInstance().info(SERVICE_NAME, "Saving user\n");
             return savedUser;
+
         } catch (Exception e) {
-            throw new IllegalArgumentException("save user error");
+            Logger.getInstance().error(SERVICE_NAME, "Exception in saving user\n");
+            throw new IllegalArgumentException("User saving error...\n");
         }
 
     }
