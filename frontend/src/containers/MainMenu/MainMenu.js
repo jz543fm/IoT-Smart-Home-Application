@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-// import Button from '@material-ui/core/Button';
 
 import classes from './MainMenu.css';
 import LightsMap from '../../components/Lights/LightsMap';
-import * as actions from '../../store/actions/index';
-
-// import Sensors from '../Sensors/Sensors';
+import axios from '../../axios-backend';
 
 class MainMenu extends Component {
     state = {
         selected: [],
-        color: '000000',
+        color: 'FFFFFF',
         openSuccessSnackbar: false,
         snackbarSuccessMessage: "",
         openErrorSnackbar: false,
@@ -24,43 +21,74 @@ class MainMenu extends Component {
         this.setState({selected: []});
     };
 
+    handleGetLights = () => {
+        // GET LIGHTS
+    };
+
     handleRefreshLights = () => {
         console.log('Refresh!');
-        // GET LIGHTS
+
+        this.handleGetLights();
         this.handleOpenSuccessSnackbar("Refreshed!");
     };
 
     handleAllOn = () => {
         console.log('All on!');
+        // this.handleOpenSuccessSnackbar("Success!");
         // SEND TURN ON ALL
-        this.handleOpenSuccessSnackbar("Success!");
-    }
+        axios.get('/api/rest/lights/all-on')
+            .then(response => {
+                console.log('Success!');
+                this.handleOpenSuccessSnackbar("Success!");
+                this.handleGetLights();
+            })
+            .catch(err => {
+                console.log('Error:');
+                console.log(err);
+                this.handleOpenErrorSnackbar("Error!");
+        });   
+    };
 
     handleAllOff = () => {
         console.log('All off!');
-        // SEND TURN OFF ALL
         this.handleOpenSuccessSnackbar("Success!");
+        // SEND TURN OFF ALL
+        axios.get('/api/rest/lights/all-off')
+            .then(response => {
+                console.log('Success!');
+                this.handleOpenSuccessSnackbar("Success!");
+                this.handleGetLights();
+            })
+            .catch(err => {
+                console.log('Error:');
+                console.log(err);
+                this.handleOpenErrorSnackbar("Error!");
+        });
     }
 
     handleTurnOn = () => {
         console.log('Turn on selected! -> [' + this.state.selected + ']');
         this.handleOpenSuccessSnackbar("Success!");
         // SEND TURN ON SELECTED
+        this.setState({selected: []});
     }
     
     handleTurnOff = () => {
         console.log('Turn off selected! -> [' + this.state.selected + ']');
         this.handleOpenSuccessSnackbar("Success!");
         // SEND TURN OFF SELECTED
+        this.setState({selected: []});
     }
-
-    handleLightClicked = ( lightId ) => {
-        // console.log('Clicked: ' + lightId + '!');
-    };
 
     handleLightChecked = ( lightId ) => {
         console.log('Checked: ' + lightId + '!');
-        this.state.selected.push(lightId);
+        if (this.state.selected.includes(lightId)){
+            // this.setState({ selected: 
+            //     this.state.selected.filter( (x) => { return x } )
+            // });
+        } else {
+            this.state.selected.push(lightId);
+        }
     }
 
     handleColorChangeSend = (newColor) => {
@@ -68,8 +96,20 @@ class MainMenu extends Component {
         console.log('Color changed from #' + this.state.color + ' to #' + newColor + ' !');
         console.log('Change color of [' + this.state.selected + '] to color #' + newColor); 
         this.setState({selected: []});
-        this.handleOpenSuccessSnackbar("Success!");
-        // SEND CHANGE COLOR      
+        // this.handleOpenSuccessSnackbar("Success!");
+        // SEND CHANGE COLOR  
+        axios.post('/api/change/color',
+            // NEW COLORS
+        )
+            .then(response => {
+                console.log('Success!');
+                this.handleOpenSuccessSnackbar("Success!");
+            })
+            .catch(err => {
+                console.log('Error:');
+                console.log(err);
+                this.handleOpenErrorSnackbar("Error!");
+            });  
     }
 
     handleOpenSuccessSnackbar = (message) => {
@@ -131,7 +171,6 @@ class MainMenu extends Component {
             <div className={classes.Menu}>
                 <LightsMap 
                     refresh={this.handleRefreshLights}
-                    lightClicked={this.handleLightClicked}
                     allOn={this.handleAllOn}
                     allOff={this.handleAllOff}
                     handleLightChecked={this.handleLightChecked}
@@ -141,7 +180,6 @@ class MainMenu extends Component {
                 />
 
                 <SnackBars />
-                {/* <Sensors /> */}
             </div>
         );
     }
@@ -153,10 +191,4 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (UID, password) => dispatch(actions.auth(UID, password)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
+export default connect(mapStateToProps)(MainMenu);

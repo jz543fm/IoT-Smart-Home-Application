@@ -17,7 +17,6 @@ class App extends Component {
       <Switch>
         <Route path="/" exact component={LogIn} />
         <Route path="/signIn" exact component={SignIn} />
-        {/* <Route path="/" exact component={MainMenu} /> */}
         <Redirect to="/"/>
       </Switch>
     );

@@ -55,7 +55,7 @@ export default function InputAdornments( props ) {
     <div className={classes.root}>
       <div>
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-name">Name</InputLabel>
+          <InputLabel htmlFor="standard-adornment-name">First Name</InputLabel>
           <Input
             id="standard-adornment-name"
             value={values.name}
@@ -64,7 +64,7 @@ export default function InputAdornments( props ) {
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-surname">Surname</InputLabel>
+          <InputLabel htmlFor="standard-adornment-surname">Last Name</InputLabel>
           <Input
             id="standard-adornment-surname"
             value={values.surname}
@@ -73,10 +73,28 @@ export default function InputAdornments( props ) {
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-login">email</InputLabel>
+          <InputLabel htmlFor="standard-adornment-login">Email</InputLabel>
           <Input
             id="standard-adornment-login"
             value={values.login}
+            onChange={handleChange('login')}
+          />
+        </FormControl>
+
+        <FormControl className={clsx(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-login">Adress</InputLabel>
+          <Input
+            id="standard-adornment-login"
+            value={values.adress}
+            onChange={handleChange('login')}
+          />
+        </FormControl>
+
+        <FormControl className={clsx(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-login">Zip Code</InputLabel>
+          <Input
+            id="standard-adornment-login"
+            value={values.zip}
             onChange={handleChange('login')}
           />
         </FormControl>

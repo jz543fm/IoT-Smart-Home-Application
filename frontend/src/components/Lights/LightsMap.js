@@ -50,7 +50,7 @@ export default function LightGrid (props) {
   const classes = useStyles();
 
   const LightClicked = (id) => {
-    props.lightClicked(id);
+    // props.lightClicked(id);
   };
 
   const handleLightChecked = ( id ) => {

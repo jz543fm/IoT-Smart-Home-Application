@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
       height: 215,
-      width: 250,
+      width: 240,
       background: "#cccccc",
     },
     control: {

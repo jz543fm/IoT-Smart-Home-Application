@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-// import axios from '../../axios-orders';
+// import axios from '../../axios-backend';
 
 export const authStart = () => {
     return {
@@ -8,11 +8,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, operator) => {
+export const authSuccess = (token, user) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token: token,
-        operator: operator,
+        user: user,
     };
 };
 
@@ -41,20 +41,22 @@ export const checkAuthTimeout = (expirationTime) => {
 
 export const auth = (authData) => {
     return dispatch => {
-        dispatch(authStart());
-        dispatch(authSuccess('token'));
-        // dispatch(checkAuthTimeout(response.data.expiresIn));
-        dispatch(checkAuthTimeout(1800000));
-        // axios.post('/sessions', authData)
-        // .then(response => {
-        //     // console.log(response);
-        //     dispatch(authSuccess(response.data.token, response.data.operator));
-        //     // dispatch(checkAuthTimeout(response.data.expiresIn));
-        //     dispatch(checkAuthTimeout(1800000));
-        // })
-        // .catch(err => {
-        //     // console.log(err.response.data.error);
-        //     dispatch(authFail(err.response.data.error));   
-        // });
+        // dispatch(authStart());
+        // dispatch(authSuccess('', {}));
+        // dispatch(checkAuthTimeout(1800000));
+
+
+        // console.log(authData);
+        axios.post('/login', authData)
+        .then(response => {
+            // console.log(response);
+            dispatch(authSuccess(response.data.token, response.data.email));
+            // dispatch(checkAuthTimeout(response.data.expiresIn));
+            dispatch(checkAuthTimeout(1800000));
+        })
+        .catch(err => {
+            console.log(err);
+            // dispatch(authFail(err.response.data.error));   
+        });
     };
 };

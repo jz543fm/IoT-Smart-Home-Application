@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 
 import Aux from '../Auxiliary/Auxiliary';
 import classes from './Layout.css';
-// import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-// import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import Menu from '../../components/Navigation/Menu/Menu';
-// import Drawer from '../../components/Navigation/Drawer/DrawerOld';
 import Drawer from '../../components/Navigation/Drawer/Drawer';
 import * as actions from '../../store/actions/index';
 
 class Layout extends Component {
-    state = {
-        showSideDrawer: false,
-    }
+    // state = {
+    //     showSideDrawer: false,
+    // }
 
     // sideDrawerClosedHandler = () => {
     //     this.setState( { showSideDrawer: false } );
@@ -73,6 +70,7 @@ class Layout extends Component {
 const mapStateToProps = state => {
     return {
       isAuth: state.auth.token !==null,
+      user: state.auth.user,
     };
 };
 
