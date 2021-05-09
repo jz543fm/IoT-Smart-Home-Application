@@ -47,12 +47,7 @@ export const auth = (authData) => {
 
 
         // console.log(authData);
-        axios.post('/login', authData, {
-            headers: {
-                "Content-type": "application/json",
-                "Accept": "application/json"
-            }
-        })
+        axios.post('/login', authData)
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data.token, response.data.email));

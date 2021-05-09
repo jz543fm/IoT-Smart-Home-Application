@@ -57,47 +57,47 @@ export default function InputAdornments( props ) {
     <div className={classes.root}>
       <div>
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-name">First Name</InputLabel>
+          <InputLabel htmlFor="standard-adornment-firstname">First Name</InputLabel>
           <Input
-            id="standard-adornment-name"
+            id="standard-adornment-firstname"
             value={values.firstname}
-            onChange={handleChange('name')}
+            onChange={handleChange('firstname')}
           />
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-surname">Last Name</InputLabel>
+          <InputLabel htmlFor="standard-adornment-lastName">Last Name</InputLabel>
           <Input
-            id="standard-adornment-surname"
+            id="standard-adornment-lastName"
             value={values.lastName}
-            onChange={handleChange('surname')}
+            onChange={handleChange('lastName')}
           />
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-login">Email</InputLabel>
+          <InputLabel htmlFor="standard-adornment-email">Email</InputLabel>
           <Input
-            id="standard-adornment-login"
+            id="standard-adornment-email"
             value={values.email}
-            onChange={handleChange('login')}
+            onChange={handleChange('email')}
           />
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-login">Adress</InputLabel>
+          <InputLabel htmlFor="standard-adornment-adress">Adress</InputLabel>
           <Input
-            id="standard-adornment-login"
+            id="standard-adornment-adress"
             value={values.adress}
-            onChange={handleChange('login')}
+            onChange={handleChange('adress')}
           />
         </FormControl>
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-login">Zip Code</InputLabel>
+          <InputLabel htmlFor="standard-adornment-zipCode">Zip Code</InputLabel>
           <Input
-            id="standard-adornment-login"
+            id="standard-adornment-zipCode"
             value={values.zipCode}
-            onChange={handleChange('login')}
+            onChange={handleChange('zipCode')}
           />
         </FormControl>
 
