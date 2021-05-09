@@ -31,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
 export default function InputAdornments( props ) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    login: '',
-    name: '',
-    surname: '',
+    firstname: '',
+    lastName: '',
+    email: '',
+    adress: '',
+    zipCode: '',
     password: '',
     passwordAgain: '',
   });
@@ -58,7 +60,7 @@ export default function InputAdornments( props ) {
           <InputLabel htmlFor="standard-adornment-name">First Name</InputLabel>
           <Input
             id="standard-adornment-name"
-            value={values.name}
+            value={values.firstname}
             onChange={handleChange('name')}
           />
         </FormControl>
@@ -67,7 +69,7 @@ export default function InputAdornments( props ) {
           <InputLabel htmlFor="standard-adornment-surname">Last Name</InputLabel>
           <Input
             id="standard-adornment-surname"
-            value={values.surname}
+            value={values.lastName}
             onChange={handleChange('surname')}
           />
         </FormControl>
@@ -76,7 +78,7 @@ export default function InputAdornments( props ) {
           <InputLabel htmlFor="standard-adornment-login">Email</InputLabel>
           <Input
             id="standard-adornment-login"
-            value={values.login}
+            value={values.email}
             onChange={handleChange('login')}
           />
         </FormControl>
@@ -94,7 +96,7 @@ export default function InputAdornments( props ) {
           <InputLabel htmlFor="standard-adornment-login">Zip Code</InputLabel>
           <Input
             id="standard-adornment-login"
-            value={values.zip}
+            value={values.zipCode}
             onChange={handleChange('login')}
           />
         </FormControl>

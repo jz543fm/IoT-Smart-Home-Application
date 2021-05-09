@@ -12,11 +12,11 @@ import axios from '../../axios-backend';
 
 class LogIn extends Component {
     state = {
-        login: '',
-        name: '',
-        surname: '',
+        firstname: '',
+        lastName: '',
+        email: '',
         adress: '',
-        zipcode: '',
+        zipCode: '',
         password: '',
         passwordAgain: '',
         created: false,
@@ -26,6 +26,13 @@ class LogIn extends Component {
 
     componentDidMount () {
         this.setState({
+            firstname: '',
+            lastName: '',
+            email: '',
+            adress: '',
+            zipCode: '',
+            password: '',
+            passwordAgain: '',
             created: false,
             showError: false,
             errorMessage: "",
@@ -38,7 +45,14 @@ class LogIn extends Component {
     }
 
     handlePostRegister = () => {
-        axios.post('/register')
+        axios.post('/register', {
+            firstname: this.state.firstname,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            adress: this.state.adress,
+            zipCode: this.state.zipCode,
+            password: this.state.password,
+        })
         .then(response => {
             console.log(this.state.name + ' ' + this.state.surname + ' your account has been created!');
             this.setState({created: true});

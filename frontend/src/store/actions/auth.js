@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-// import axios from '../../axios-backend';
+import axios from '../../axios-backend';
 
 export const authStart = () => {
     return {
