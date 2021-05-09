@@ -45,23 +45,24 @@ class LogIn extends Component {
     }
 
     handlePostRegister = () => {
-        axios.post('/register', {
-            firstname: this.state.firstname,
+        const postData = {
+            firstName: this.state.firstname,
             lastName: this.state.lastName,
             email: this.state.email,
-            adress: this.state.adress,
+            address: this.state.adress,
             zipCode: this.state.zipCode,
             password: this.state.password,
-        })
-        .then(response => {
-            console.log(this.state.name + ' ' + this.state.surname + ' your account has been created!');
-            this.setState({created: true});
-        })
-        .catch(err => {
-            this.handleError("Something went wrong!");
-            console.log(err);
-        });   
-        
+        };
+        console.log(JSON.stringify(postData));
+        axios.post('/register', JSON.stringify(postData))
+            .then(response => {
+                console.log(this.state.name + ' ' + this.state.surname + ' your account has been created!');
+                this.setState({created: true});
+            })
+            .catch(err => {
+                this.handleError("Something went wrong!");
+                console.log(err);
+            });
     }
 
     handleError = (message) => {

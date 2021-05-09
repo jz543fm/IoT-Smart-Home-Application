@@ -46,8 +46,13 @@ export const auth = (authData) => {
         // dispatch(checkAuthTimeout(1800000));
 
 
-        // console.log(authData);
-        axios.post('/login', authData)
+        console.log(authData);
+        axios.post('/login',
+            //firstName: authData.username,
+            //lastName: authData.password
+            JSON.stringify(authData)
+
+        )
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data.token, response.data.email));

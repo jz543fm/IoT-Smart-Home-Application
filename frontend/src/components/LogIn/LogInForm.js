@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function InputAdornments( props ) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    login: '',
+    username: '',
     password: ''
   });
 
@@ -56,8 +56,8 @@ export default function InputAdornments( props ) {
           <InputLabel htmlFor="standard-adornment-password">Log In</InputLabel>
           <Input
             id="standard-adornment-login"
-            value={values.login}
-            onChange={handleChange('login')}
+            value={values.username}
+            onChange={handleChange('username')}
           />
         </FormControl>
 
