@@ -47,9 +47,14 @@ export const auth = (authData) => {
 
 
         // console.log(authData);
-        axios.post('/login', authData)
+        axios.post('/login', authData, {
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            }
+        })
         .then(response => {
-            // console.log(response);
+            console.log(response);
             dispatch(authSuccess(response.data.token, response.data.email));
             // dispatch(checkAuthTimeout(response.data.expiresIn));
             dispatch(checkAuthTimeout(1800000));

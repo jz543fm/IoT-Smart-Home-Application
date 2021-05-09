@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 class LogIn extends Component {
     state = {
-        login: '',
+        username: '',
         password: ''
     }
 
