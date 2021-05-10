@@ -43,7 +43,7 @@ class Layout extends Component {
 
     render () {
 
-        let PageLayout = <Drawer logoutUser={this.logoutHandler} userName={'name@mail.com'}>
+        let PageLayout = <Drawer logoutUser={this.logoutHandler} userName={this.props.user}>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>

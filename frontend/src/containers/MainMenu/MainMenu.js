@@ -51,7 +51,7 @@ class MainMenu extends Component {
 
     handleAllOff = () => {
         console.log('All off!');
-        this.handleOpenSuccessSnackbar("Success!");
+        // this.handleOpenSuccessSnackbar("Success!");
         // SEND TURN OFF ALL
         axios.get('/api/rest/lights/all-off')
             .then(response => {
@@ -95,11 +95,26 @@ class MainMenu extends Component {
         this.setState({color: newColor});
         console.log('Color changed from #' + this.state.color + ' to #' + newColor + ' !');
         console.log('Change color of [' + this.state.selected + '] to color #' + newColor); 
-        this.setState({selected: []});
-        // this.handleOpenSuccessSnackbar("Success!");
-        // SEND CHANGE COLOR  
+        
+        let newColors = [];
+        const colorToSet = "00" + newColor.slice(1, 7);
+        
+        let i;
+        for (i = 1; i <= 97; i++) {
+            if (this.state.selected.includes(i)) {
+                newColors.push(colorToSet);
+            } else {
+                newColors.push("ffffffff");
+            }
+        } 
+        let lightPost = {
+            colors: newColors,
+            duration: 500,  
+        };
+
+        console.log(JSON.stringify(lightPost));
         axios.post('/api/change/color',
-            // NEW COLORS
+            JSON.stringify(lightPost)
         )
             .then(response => {
                 console.log('Success!');
@@ -109,7 +124,8 @@ class MainMenu extends Component {
                 console.log('Error:');
                 console.log(err);
                 this.handleOpenErrorSnackbar("Error!");
-            });  
+        });  
+        this.setState({selected: []});
     }
 
     handleOpenSuccessSnackbar = (message) => {

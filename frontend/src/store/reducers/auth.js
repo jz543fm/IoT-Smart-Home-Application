@@ -3,6 +3,7 @@ import { updateObject } from '../utility';
 
 const initState = {
     token: null,
+    user: "",
     loading: false,
 };
 
