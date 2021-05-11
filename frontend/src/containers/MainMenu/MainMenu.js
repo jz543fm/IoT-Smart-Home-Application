@@ -66,11 +66,12 @@ class MainMenu extends Component {
         });
     }
 
-    handleTurnOn = () => {
+    handleTurnOn = (duration) => {
         console.log('Turn on selected! -> [' + this.state.selected + ']');
-        this.handleOpenSuccessSnackbar("Success!");
+        // this.handleOpenSuccessSnackbar("Success!");
         // SEND TURN ON SELECTED
-        this.setState({selected: []});
+        this.handleColorChangeSend('#000000', 500);
+        // this.setState({selected: []});
     }
     
     handleTurnOff = () => {
@@ -82,16 +83,20 @@ class MainMenu extends Component {
 
     handleLightChecked = ( lightId ) => {
         console.log('Checked: ' + lightId + '!');
-        if (this.state.selected.includes(lightId)){
-            // this.setState({ selected: 
-            //     this.state.selected.filter( (x) => { return x } )
-            // });
-        } else {
+        // if (this.state.selected.includes(lightId)){
+        //     this.setState({ selected: 
+        //         this.state.selected.filter( (x) => { return x } )
+        //     });
+        // } else {
+        //     this.state.selected.push(lightId);
+        // }
+
+        if (!this.state.selected.includes(lightId)){
             this.state.selected.push(lightId);
         }
     }
 
-    handleColorChangeSend = (newColor) => {
+    handleColorChangeSend = (newColor, newDuration) => {
         this.setState({color: newColor});
         console.log('Color changed from #' + this.state.color + ' to #' + newColor + ' !');
         console.log('Change color of [' + this.state.selected + '] to color #' + newColor); 
@@ -109,7 +114,7 @@ class MainMenu extends Component {
         } 
         let lightPost = {
             colors: newColors,
-            duration: 500,  
+            duration: newDuration,  
         };
 
         console.log(JSON.stringify(lightPost));

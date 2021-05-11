@@ -19,7 +19,7 @@ export const authSuccess = (token, user) => {
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
-        error: error,
+        error: "Something went wrong.",
     };
 };
 
@@ -72,7 +72,7 @@ export const auth = (authData) => {
         })
         .catch(err => {
             console.log(err);
-            // dispatch(authFail(err.response.data.error));   
+            dispatch(authFail());   
         });
     };
 };

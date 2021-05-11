@@ -4,6 +4,7 @@ import { updateObject } from '../utility';
 const initState = {
     token: null,
     user: "",
+    error: "",
     loading: false,
 };
 
@@ -19,6 +20,13 @@ const authSuccess = (state, action) => {
      });
 };
 
+const authFailed = (state, action) => {
+    return updateObject( state, {
+        errorMessage: action.error,
+        loading: false,
+    });
+} ;
+
 const authLogout = (state, action) => {
     return updateObject(state, { token: null});
 };
@@ -29,6 +37,7 @@ const reducer = (state = initState, action) => {
         case actionTypes.AUTH_START: return authStart(state, action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+        case actionTypes.AUTH_FAIL: return authFailed(state, action);
         default:
             return state;
     }

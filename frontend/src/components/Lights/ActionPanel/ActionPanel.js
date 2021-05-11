@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
 
 import { CirclePicker } from 'react-color'
 
@@ -17,9 +21,10 @@ buttonDiv: {
 export default function DiscreteSlider( props ) {
   const classes = useStyles();
   const [color, setColor] = useState('ff0000');
+  const [duration, setDuration] = useState(500);
 
   const handleColorChange = () => {
-    props.handleColorChangeSend(color);
+    props.handleColorChangeSend(color, duration);
   }
 
   const ColorPicker = () => {
@@ -29,6 +34,13 @@ export default function DiscreteSlider( props ) {
       onChangeComplete={ (color) => {setColor(color.hex)} }
   />
     );
+  };
+
+  const handleDurationChange = (event) => {
+    let newValue = parseInt(event.target.value, 10);
+    if (newValue < 1000000) {
+      setDuration(newValue);
+    }
   };
 
   return (
@@ -54,10 +66,32 @@ export default function DiscreteSlider( props ) {
         
 
       </Grid>  
-      <Grid item xs={3}>
-        <div className={classes.buttonDiv}>
-          <Button variant="contained" onClick={handleColorChange} >Change</Button>
-        </div>
+      <Grid 
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item >
+        <FormControl>
+          <Input
+            id="standard-adornment-weight"
+            value={duration}
+            onChange={handleDurationChange}
+            endAdornment={<InputAdornment position="end">ms</InputAdornment>}
+            aria-describedby="standard-weight-helper-text"
+            inputProps={{
+              'aria-label': 'weight',
+            }}
+          />
+          <FormHelperText id="standard-weight-helper-text">Duration</FormHelperText>
+        </FormControl>
+        </Grid> 
+        <Grid item>
+          <div className={classes.buttonDiv}>
+            <Button variant="contained" onClick={handleColorChange} >Change</Button>
+          </div>
+        </Grid> 
       </Grid> 
     </Grid> 
   );
