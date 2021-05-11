@@ -11,56 +11,69 @@ import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'date',
+    label: 'Date',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'action',
+    label: 'Action',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'items',
+    label: 'Items',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toFixed(2),
+    format: (value) => value.toLocaleString('en-US'),
   },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(name, date, action, items) {
+  return { name, date, action, items };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  createData('Tomas', '1.5.2021 15:45', "Change color", "[1,2,3,4]"),
+  createData('Juraj', '2.5.2021 20:15', "Turn On All", "All"),
+  createData('Tomas', '3.5.2021 18:43', "Turn Off All", "All"),
+  createData('Tomas', '4.5.2021 19:10', "Change color", "[21,22,23]"),
+  createData('Juraj', '5.5.2021 15:13', "Turn Off All", "All"),
+  createData('Tomas', '6.5.2021 8:59', "Turn Off Selected", "[1,3,5,7,9]"),
+  createData('Juraj', '7.5.2021 10:54', "Turn On Selected", "[1,2]"),
+  createData('Tomas', '8.5.2021 8:25', "Turn On All", "All"),
+  createData('Juraj', '9.5.2021 9:24', "Turn Off All", "All"),
+  createData('Tomas', '1.5.2021 11:16', "Change color", "[90,91,92,98,97]"),
+  createData('Tomas', '3.5.2021 19:35', "Turn Off All", "All"),
+  createData('Juraj', '5.5.2021 12:58', "Turn On Selected", "[12]"),
+  createData('Juraj', '8.5.2021 17:18', "Change color", "[45,46,47,48]"),
+  createData('Tomas', '6.5.2021 21:19', "Turn On All", "All"),
+  createData('Juraj', '9.5.2021 22:38', "Change color", "[56,57,58,59]"),
+  createData('Tomas', '1.5.2021 15:45', "Change color", "[1,2,3,4]"),
+  createData('Juraj', '2.5.2021 20:15', "Turn On All", "All"),
+  createData('Tomas', '3.5.2021 18:43', "Turn Off All", "All"),
+  createData('Tomas', '4.5.2021 19:10', "Change color", "[21,22,23]"),
+  createData('Juraj', '5.5.2021 15:13', "Turn Off All", "All"),
+  createData('Tomas', '6.5.2021 8:59', "Turn Off Selected", "[1,3,5,7,9]"),
+  createData('Juraj', '7.5.2021 10:54', "Turn On Selected", "[1,2]"),
+  createData('Tomas', '8.5.2021 8:25', "Turn On All", "All"),
+  createData('Juraj', '9.5.2021 9:24', "Turn Off All", "All"),
+  createData('Tomas', '1.5.2021 11:16', "Change color", "[90,91,92,98,97]"),
+  createData('Tomas', '3.5.2021 19:35', "Turn Off All", "All"),
+  createData('Juraj', '5.5.2021 12:58', "Turn On Selected", "[12]"),
+  createData('Juraj', '8.5.2021 17:18', "Change color", "[45,46,47,48]"),
+  createData('Tomas', '6.5.2021 21:19', "Turn On All", "All"),
+  createData('Juraj', '9.5.2021 22:38', "Change color", "[56,57,58,59]"),
 ];
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: '97%',
   },
   container: {
     maxHeight: 440,
@@ -117,7 +130,7 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 15]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
